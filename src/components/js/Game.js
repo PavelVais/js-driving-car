@@ -13,18 +13,24 @@ export class Game {
     }
 
     run() {
-        this.road = new Road(this.canvas.width / 2, this.canvas.width * .9);
-        this.car = new Car(this.road.getLaneCenter(0), 100, 30, 50);
+        this.road = new Road(this.canvas.width / 2, this.canvas.width * .9, 3);
+        this.car = new Car(this.road.getLaneCenter(1), 100, 30, 50);
 
         this.#animate();
     }
 
     #animate() {
-        this.car.update();
+        this.car.update(this.road.borders);
+
         this.canvas.height = window.innerHeight;
+
+        this.ctx.save();
+        this.ctx.translate(0, -this.car.y + this.canvas.height * 0.7);
 
         this.road.draw(this.ctx);
         this.car.draw(this.ctx);
+
+        this.ctx.restore();
         requestAnimationFrame(this.#animate.bind(this));
     }
 }

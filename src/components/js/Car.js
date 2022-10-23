@@ -1,4 +1,5 @@
 import {Controls} from "@/components/js/Controls";
+import {Sensor} from "@/components/js/Sensor";
 
 export class Car {
     speed = 0;
@@ -14,11 +15,14 @@ export class Car {
         this.height = height;
         this.controls = new Controls();
 
+        this.sensor = new Sensor(this);
+
     }
 
 
-    update() {
+    update(roadBorders) {
         this.#move();
+        this.sensor.update(roadBorders);
     }
 
 
@@ -88,5 +92,7 @@ export class Car {
         ctx.fill();
 
         ctx.restore();
+
+       this.sensor.draw(ctx);
     }
 }

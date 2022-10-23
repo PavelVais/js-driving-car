@@ -42,6 +42,6 @@ a {
 }
 
 canvas {
-    background-color: #2c3e50;
+    background-color: #8d8d8d;
 }
 </style>
